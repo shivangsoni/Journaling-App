@@ -6,7 +6,8 @@ main = Blueprint('main', __name__)
 
 @main.route('/')
 def index():
-    return render_template('index.html')
+    entries = get_entries()
+    return render_template('index.html', entries=entries)
 
 @main.route('/entry', methods=['GET', 'POST'])
 def entry():
@@ -24,3 +25,12 @@ def save_entry(entry_text, mood):
     cursor.execute('INSERT INTO entries (entry, mood) VALUES (?, ?)', (entry_text, mood))
     conn.commit()
     conn.close()
+
+def get_entries():
+    db_path = os.path.join('data', 'journal_entries.db')
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+    cursor.execute('SELECT entry, mood FROM entries')
+    entries = cursor.fetchall()
+    conn.close()
+    return entries

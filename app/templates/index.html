@@ -3,4 +3,11 @@
 {% block content %}
 <h1>Welcome to Your Journal</h1>
 <p>Start journaling your thoughts and track your mood.</p>
+
+<h2>Previous Entries</h2>
+<ul>
+    {% for entry, mood in entries %}
+        <li><strong>Mood:</strong> {{ mood }} <br> <strong>Entry:</strong> {{ entry }}</li>
+    {% endfor %}
+</ul>
 {% endblock %}
