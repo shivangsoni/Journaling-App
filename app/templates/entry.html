@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>New Journal Entry</h1>
+<form method="POST">
+    <label for="entry">Your Entry:</label>
+    <textarea id="entry" name="entry" rows="4" cols="50"></textarea>
+    <label for="mood">Your Mood:</label>
+    <select id="mood" name="mood">
+        <option value="happy">Happy</option>
+        <option value="sad">Sad</option>
+        <option value="neutral">Neutral</option>
+    </select>
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}
