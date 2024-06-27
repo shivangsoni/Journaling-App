@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>Recommendations to Improve</h1>
+<ul>
+    {% for recommendation in recommendations %}
+        <li>{{ recommendation }}</li>
+    {% endfor %}
+</ul>
+<a href="{{ url_for('main.index') }}">Back to Home</a>
+{% endblock %}

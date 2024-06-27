@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>Summary of Journaling and Mood</h1>
+<ul>
+    {% for mood, count in summary_data.items() %}
+        <li>{{ mood }}: {{ count }}</li>
+    {% endfor %}
+</ul>
+<a href="{{ url_for('main.index') }}">Back to Home</a>
+{% endblock %}
