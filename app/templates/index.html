@@ -4,23 +4,48 @@
 <h1>Welcome to Your Journal</h1>
 <p>Start journaling your thoughts and track your mood.</p>
 
-<h2>Previous Entries</h2>
-<div class="kanban-board">
+<div class="tabs">
     {% for date, entries in grouped_entries.items() %}
-    <div class="kanban-column">
-        <h3>{{ date }}</h3>
-        <ul>
-            {% for entry in entries %}
-            <li>
-                <strong>Mood:</strong> {{ entry.mood }} <br>
-                <strong>Entry:</strong> {{ entry.entry }}
-                <form action="{{ url_for('main.delete', entry_id=loop.index0) }}" method="post" style="display:inline;">
-                    <button type="submit" class="delete-button"><i class="fas fa-trash"></i></button>
-                </form>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
+    <button class="tablinks {% if loop.first %}active{% endif %}" onclick="openTab(event, '{{ date }}')">{{ date }}</button>
     {% endfor %}
 </div>
+
+{% for date, entries in grouped_entries.items() %}
+<div id="{{ date }}" class="tabcontent {% if loop.first %}active{% endif %}">
+    <h2>{{ date }}</h2>
+    <ul>
+        {% for entry in entries %}
+        <li>
+            <strong>Mood:</strong> {{ entry.mood }} <br>
+            <strong>Entry:</strong> {{ entry.entry }}
+            <form action="{{ url_for('main.delete', entry_id=loop.index0) }}" method="post" style="display:inline;">
+                <button type="submit" class="delete-button"><i class="fas fa-trash"></i></button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endfor %}
+
+<script>
+// Function to open a specific tab by clicking on it
+function openTab(evt, tabName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+// Open the first tab by default when the page loads
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementsByClassName("tablinks")[0].click();
+});
+</script>
 {% endblock %}

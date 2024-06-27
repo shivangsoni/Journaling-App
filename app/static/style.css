@@ -6,7 +6,7 @@ body {
 }
 
 nav {
-    background-color: #8587e6;
+    background-color: #4CAF50;
     color: white;
     padding: 10px 0;
 }
@@ -44,61 +44,43 @@ h1 {
     color: #333;
 }
 
-form.entry-form {
-    display: flex;
-    flex-direction: column;
+.tabs {
+    overflow: hidden;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
 }
 
-form.entry-form label {
-    margin-top: 10px;
+.tablinks {
+    background-color: #f1f1f1;
+    float: left;
+    border: 1px solid #ccc;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    transition: background-color 0.3s;
 }
 
-form.entry-form textarea,
-form.entry-form select {
-    margin-top: 5px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+.tablinks:hover {
+    background-color: #ddd;
 }
 
-form.entry-form button {
-    margin-top: 15px;
-    padding: 10px;
+.tablinks.active {
     background-color: #4CAF50;
     color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
 }
 
-form.entry-form button:hover {
-    background-color: #45a049;
+.tabcontent {
+    display: none;
+    padding: 20px;
+    border-top: none;
 }
 
-.kanban-board {
-    display: flex;
-    overflow-x: auto;
-}
-
-.kanban-column {
-    background-color: #f9f9f9;
-    margin: 10px;
-    padding: 10px;
-    border-radius: 4px;
-    box-shadow: 0 0 5px rgba(0,0,0,0.1);
-    min-width: 300px;
-}
-
-.kanban-column h3 {
-    color: #333;
-}
-
-.kanban-column ul {
+ul {
     list-style-type: none;
     padding: 0;
 }
 
-.kanban-column ul li {
+ul li {
     background-color: #fff;
     margin-bottom: 10px;
     padding: 10px;
@@ -106,11 +88,11 @@ form.entry-form button:hover {
     box-shadow: 0 0 5px rgba(0,0,0,0.1);
 }
 
-.kanban-column ul li form {
+ul li form {
     display: inline;
 }
 
-.kanban-column ul li form button.delete-button {
+ul li form button.delete-button {
     background-color: transparent;
     color: #e74c3c;
     border: none;
@@ -121,10 +103,10 @@ form.entry-form button:hover {
     align-items: center;
 }
 
-.kanban-column ul li form button.delete-button i {
+ul li form button.delete-button i {
     margin-right: 0; /* Ensure the icon is not spaced from text, as there is no text */
 }
 
-.kanban-column ul li form button.delete-button:hover {
+ul li form button.delete-button:hover {
     color: #c0392b;
 }

@@ -14,10 +14,10 @@ def index():
         df = pd.read_csv(CSV_FILE)
         entries = df.to_dict('records')
 
-    # Group entries by date
+    # Group entries by unique dates
     grouped_entries = {}
     for entry in entries:
-        date = entry['date']
+        date = entry['date'].split()[0]  # Extract date without time
         if date not in grouped_entries:
             grouped_entries[date] = []
         grouped_entries[date].append(entry)
@@ -59,6 +59,7 @@ def summary():
     else:
         summary_data = {}
     return render_template('summary.html', summary_data=summary_data)
+
 
 @main.route('/recommendations')
 def recommendations():
