@@ -16,6 +16,8 @@ def index():
     if os.path.exists(CSV_FILE) and os.path.getsize(CSV_FILE) > 0:
         try:
             df = pd.read_csv(CSV_FILE)
+            df['date'] = pd.to_datetime(df['date'])  # Convert the date column to datetime
+            df = df.sort_values(by='date', ascending=False)  # Sort by date in descending order
             entries = df.to_dict('records')
         except pd.errors.EmptyDataError:
             entries = []
@@ -23,7 +25,7 @@ def index():
     # Group entries by unique dates
     grouped_entries = {}
     for entry in entries:
-        date = entry['date'].split()[0]  # Extract date without time
+        date = entry['date'].strftime('%Y-%m-%d')  # Extract date without time
         if date not in grouped_entries:
             grouped_entries[date] = []
         grouped_entries[date].append(entry)

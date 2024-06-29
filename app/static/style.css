@@ -49,7 +49,7 @@ nav a {
 }
 
 nav a:last-child {
-    margin-right: 250px; /* Add extra space to the last nav icon */
+    margin-right: 330px; /* Add extra space to the last nav icon */
 }
 
 nav a i {
@@ -135,6 +135,7 @@ ul li .entry-header {
 
 ul li .entry-content {
     margin-top: 10px; /* Added margin for spacing */
+    white-space: pre-line;
 }
 
 ul li form {
