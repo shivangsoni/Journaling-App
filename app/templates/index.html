@@ -6,19 +6,20 @@
 
 <div class="tabs">
     {% for date, entries in grouped_entries.items() %}
-    <button class="tablinks {% if loop.first %}active{% endif %}" onclick="openTab(event, '{{ date }}')">{{ date }}</button>
+    <button class="tablinks {% if active_date == date %}active{% endif %}" onclick="openTab(event, '{{ date }}')">{{ date }}</button>
     {% endfor %}
 </div>
 
 {% for date, entries in grouped_entries.items() %}
-<div id="{{ date }}" class="tabcontent {% if loop.first %}active{% endif %}">
+<div id="{{ date }}" class="tabcontent {% if active_date == date %}active{% endif %}">
     <h2>{{ date }}</h2>
     <ul>
         {% for entry in entries %}
         <li>
             <strong>Mood:</strong> {{ entry.mood }} <br>
             <strong>Entry:</strong> {{ entry.entry }}
-            <form action="{{ url_for('main.delete', entry_id=loop.index0) }}" method="post" style="display:inline;">
+            <form action="{{ url_for('main.delete', entry_id=entry.id) }}" method="post" style="display:inline;">
+                <input type="hidden" name="date" value="{{ date }}">
                 <button type="submit" class="delete-button"><i class="fas fa-trash"></i></button>
             </form>
         </li>
@@ -43,9 +44,14 @@ function openTab(evt, tabName) {
     evt.currentTarget.className += " active";
 }
 
-// Open the first tab by default when the page loads
+// Open the active tab on page load
 document.addEventListener("DOMContentLoaded", function() {
-    document.getElementsByClassName("tablinks")[0].click();
+    var activeTab = document.querySelector(".tablinks.active");
+    if (activeTab) {
+        activeTab.click();
+    } else {
+        document.getElementsByClassName("tablinks")[0].click();
+    }
 });
 </script>
 {% endblock %}

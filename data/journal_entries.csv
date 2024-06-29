@@ -1,12 +1,4 @@
-entry,mood,date
-This is good way to journal your journey,happy,2024-06-26 22:48:09
-test,happy,2024-06-26 23:33:54
-This is good way to journal your journey,happy,2024-06-25 22:48:09
-this is nikita,neutral,2024-06-27 22:51:08
-test,happy,2024-06-28 23:33:54
-This is good way to journal your journey,happy,2024-06-29 22:48:09
-this is nikita,neutral,2024-06-30 22:51:08
-test,happy,2024-07-1 23:33:54
-This is good way to journal your journey,happy,2024-07-02 22:48:09
-this is nikita,neutral,2024-07-3 22:51:08
-test,happy,2024-07-04 23:33:54
+id,entry,mood,date
+924a9d7f-b2cc-467b-80f4-c8bf9721c878,test test,happy,2024-06-29 09:11:15
+924a9d7f-b2cc-467b-80f4-c8bf9721c980,Shivang,happy,2024-06-28 09:11:15
+924a9d7f-b2cc-467b-80f4-c8bf97r23415,Shivang,happy,2024-06-28 09:20:00
