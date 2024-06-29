@@ -8,14 +8,19 @@
     <title>Journal App</title>
 </head>
 <body>
-    <nav>
-        <div class="container">
-            <a href="{{ url_for('main.index') }}"><i class="fas fa-home"></i> Home</a>
-            <a href="{{ url_for('main.entry') }}"><i class="fas fa-plus"></i> New Entry</a>
-            <a href="{{ url_for('main.summary') }}"><i class="fas fa-chart-line"></i> Summary</a>
-            <a href="{{ url_for('main.recommendations') }}"><i class="fas fa-lightbulb"></i> Recommendations</a>
+    <header>
+        <div class="header-container">
+            <a href="{{ url_for('main.index') }}">
+                <img src="{{ url_for('static', filename='images/journal_ai_logo.png') }}" alt="Journal.ai Logo" class="logo">
+            </a>
+            <nav class="nav-container">
+                <a href="{{ url_for('main.index') }}"><i class="fas fa-home"></i> Home</a>
+                <a href="{{ url_for('main.entry') }}"><i class="fas fa-plus"></i> New Entry</a>
+                <a href="{{ url_for('main.summary') }}"><i class="fas fa-chart-line"></i> Summary</a>
+                <a href="{{ url_for('main.recommendations') }}"><i class="fas fa-lightbulb"></i> Recommendations</a>
+            </nav>
         </div>
-    </nav>
+    </header>
     <div class="container">
         {% block content %}{% endblock %}
     </div>

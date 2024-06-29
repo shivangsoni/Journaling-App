@@ -10,36 +10,46 @@ body {
     font-family: 'Arial', sans-serif;
     background-color: #f0f2f5;
     color: #333;
-    margin: 0;
-    padding: 0;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* Navigation Bar */
-nav {
+.header-container {
+    display: flex;
+    align-items: center;
     background-color: #527dff;
-    color: white;
-    padding: 15px 0;
     width: 100%;
+    padding: 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    justify-content: space-between; /* Ensure content is spread out */
 }
 
-nav .container {
+.logo {
+    height: 50px;
+    margin-right: 20px;
+}
+
+.nav-container {
+    flex: 1;
     display: flex;
-    justify-content: space-between;
-    max-width: 1100px;
-    margin: 0 auto;
+    justify-content: space-evenly; /* Add even space between elements */
+    align-items: center;
+    margin-left: 250px; /* Add space between logo and nav links */
 }
 
 nav a {
-    color: #293943; /* Changed color to blue */
-    margin: 0 15px;
+    color: #fff; /* Ensure links are white to contrast the blue background */
     text-decoration: none;
     font-weight: bold;
     display: flex;
     align-items: center;
+    margin: 0 40px; /* Add space between each button */
+}
+
+nav a:last-child {
+    margin-right: 250px; /* Add extra space to the last nav icon */
 }
 
 nav a i {
