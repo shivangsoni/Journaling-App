@@ -110,12 +110,21 @@ ul {
 ul li {
     background-color: #fff;
     margin-bottom: 5px; /* Reduced margin */
-    padding: 5px 10px; /* Reduced padding */
+    padding: 10px 10px; /* Increased padding */
     border-radius: 8px;
     box-shadow: 0 0 5px rgba(0,0,0,0.1); /* Reduced shadow */
     display: flex;
+    flex-direction: column; /* Added to stack items vertically */
+}
+
+ul li .entry-header {
+    display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+ul li .entry-content {
+    margin-top: 10px; /* Added margin for spacing */
 }
 
 ul li form {

@@ -16,12 +16,16 @@
     <ul>
         {% for entry in entries %}
         <li>
-            <strong>Mood:</strong> {{ entry.mood }} <br/>
-            <strong>Entry:</strong> {{ entry.entry }}
-            <form action="{{ url_for('main.delete', entry_id=entry.id) }}" method="post" style="display:inline;">
-                <input type="hidden" name="date" value="{{ date }}">
-                <button type="submit" class="delete-button"><i class="fas fa-trash"></i></button>
-            </form>
+            <div class="entry-header">
+                <span><strong>Mood:</strong> {{ entry.mood }}</span>
+                <form action="{{ url_for('main.delete', entry_id=entry.id) }}" method="post" style="display:inline;">
+                    <input type="hidden" name="date" value="{{ date }}">
+                    <button type="submit" class="delete-button"><i class="fas fa-trash"></i></button>
+                </form>
+            </div>
+            <div class="entry-content">
+                <strong>Entry:</strong> {{ entry.entry }}
+            </div>
         </li>
         {% endfor %}
     </ul>
