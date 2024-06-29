@@ -19,7 +19,7 @@ body {
 
 /* Navigation Bar */
 nav {
-    background-color: #4CAF50;
+    background-color: #527dff;
     color: white;
     padding: 15px 0;
     width: 100%;
@@ -34,7 +34,7 @@ nav .container {
 }
 
 nav a {
-    color: #3498db; /* Changed color to blue */
+    color: #293943; /* Changed color to blue */
     margin: 0 15px;
     text-decoration: none;
     font-weight: bold;
@@ -60,7 +60,7 @@ nav a i {
 
 /* Heading Styling */
 h1 {
-    color: #4CAF50;
+    color: #527dff;
     margin-bottom: 20px;
     font-size: 2em;
     text-align: center;
@@ -91,7 +91,7 @@ h1 {
 }
 
 .tablinks.active {
-    background-color: #4CAF50;
+    background-color: #527dff;
     color: white;
 }
 
@@ -139,7 +139,7 @@ ul li form button.delete-button i {
 }
 
 ul li form button.delete-button:hover {
-    color: #c0392b;
+    color: #cbcdce82;
 }
 
 /* Form Styling */
@@ -162,7 +162,7 @@ ul li form button.delete-button:hover {
 }
 
 .entry-form button {
-    background-color: #4CAF50;
+    background-color: #527dff;
     color: white;
     border: none;
     cursor: pointer;
@@ -170,11 +170,11 @@ ul li form button.delete-button:hover {
 }
 
 .entry-form button:hover {
-    background-color: #45a049;
+    background-color: #527dff;
 }
 
 /* Page Heading Styling */
 h2 {
-    color: #4CAF50;
+    color: #527dff;
     margin-bottom: 20px;
 }
