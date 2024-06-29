@@ -1,8 +1,12 @@
-from flask import Blueprint, render_template, request, redirect, url_for
 import pandas as pd
+import openai
 import os
+from flask import Blueprint, render_template, request, redirect, url_for
 from datetime import datetime
 import uuid
+
+# Import the commentsummary function from journal_summarizer using relative import
+from .journal_summarizer import commentsummary
 
 main = Blueprint('main', __name__)
 
@@ -16,16 +20,15 @@ def index():
     if os.path.exists(CSV_FILE) and os.path.getsize(CSV_FILE) > 0:
         try:
             df = pd.read_csv(CSV_FILE)
-            df['date'] = pd.to_datetime(df['date'])  # Convert the date column to datetime
-            df = df.sort_values(by='date', ascending=False)  # Sort by date in descending order
+            df['date'] = pd.to_datetime(df['date'])
+            df = df.sort_values(by='date', ascending=False)
             entries = df.to_dict('records')
         except pd.errors.EmptyDataError:
             entries = []
 
-    # Group entries by unique dates
     grouped_entries = {}
     for entry in entries:
-        date = entry['date'].strftime('%Y-%m-%d')  # Extract date without time
+        date = entry['date'].strftime('%Y-%m-%d')
         if date not in grouped_entries:
             grouped_entries[date] = []
         grouped_entries[date].append(entry)
@@ -75,14 +78,13 @@ def summary():
     if os.path.exists(CSV_FILE) and os.path.getsize(CSV_FILE) > 0:
         try:
             df = pd.read_csv(CSV_FILE)
-            summary_data = df.groupby('mood').size().to_dict()
+            summary_data = commentsummary().to_dict()##df.groupby('mood').size().to_dict()
         except pd.errors.EmptyDataError:
             summary_data = {}
     return render_template('summary.html', summary_data=summary_data)
 
 @main.route('/recommendations')
 def recommendations():
-    # Placeholder recommendations
     recommendations_list = [
         "Write more consistently.",
         "Focus on positive events.",

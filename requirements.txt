@@ -3,3 +3,7 @@ pandas
 spacy
 nltk
 matplotlib
+openai
+langchain
+langchain-openai
+tiktoken
