@@ -2,10 +2,12 @@
 
 {% block content %}
 <h1>Recommendations to Improve</h1>
-<ul>
-    {% for recommendation in recommendations %}
-        <li>{{ recommendation }}</li>
-    {% endfor %}
-</ul>
+<div class="recommendations-container">
+    <ul class="recommendations-list">
+        {% for recommendation in recommendations %}
+        <li>{{ recommendation|safe }}</li>
+        {% endfor %}
+    </ul>
+</div>
 <a href="{{ url_for('main.index') }}">Back to Home</a>
 {% endblock %}

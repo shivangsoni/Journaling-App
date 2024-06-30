@@ -4,13 +4,24 @@ import os
 from flask import Blueprint, render_template, request, redirect, url_for
 from datetime import datetime
 import uuid
+import re
 
 # Import the commentsummary function from journal_summarizer using relative import
-from .journal_summarizer import commentsummary
+from .journal_summarizer import commentsummary, read_csv
 
 main = Blueprint('main', __name__)
-
 CSV_FILE = os.path.join('data', 'journal_entries.csv')
+SUMMARY_FILE = os.path.join('data', 'summary.csv')
+
+def format_recommendation_text(text):
+    # Use regular expressions to format the text with HTML tags
+    formatted_text = re.sub(r"(\d+)\. ", r"<p>\1. ", text)
+    formatted_text = formatted_text.replace(" - **", "<br>- **")
+    formatted_text = formatted_text.replace(" (", "<br>(")
+    formatted_text = re.sub(r"\*\*(.*?)\*\*", r"<strong>\1</strong>", formatted_text)
+    formatted_text += "</p>"  # Add closing paragraph tag at the end
+    return formatted_text
+
 
 @main.route('/')
 def index():
@@ -74,24 +85,28 @@ def delete(entry_id):
 
 @main.route('/summary')
 def summary():
-    summary_data = {}
+    summary_data = []
     if os.path.exists(CSV_FILE) and os.path.getsize(CSV_FILE) > 0:
         try:
-            df = pd.read_csv(CSV_FILE)
-            summary_data = commentsummary().to_dict()##df.groupby('mood').size().to_dict()
+            summary_data = commentsummary()
         except pd.errors.EmptyDataError:
-            summary_data = {}
+            summary_data = []
     return render_template('summary.html', summary_data=summary_data)
 
 @main.route('/recommendations')
 def recommendations():
-    recommendations_list = [
-        "Write more consistently.",
-        "Focus on positive events.",
-        "Reflect on your entries to find patterns.",
-        "Try journaling at the same time each day."
-    ]
-    return render_template('recommendations.html', recommendations=recommendations_list)
+    summary_data = []
+    if os.path.exists(SUMMARY_FILE) and os.path.getsize(SUMMARY_FILE) > 0:
+        try:
+            summary_data = read_csv(SUMMARY_FILE).to_dict('records')
+        except pd.errors.EmptyDataError:
+            summary_data = []
+
+    recommendations = commentsummary(summary_data)
+    recommend_text = []
+    for recommendation in recommendations:
+        recommend_text.append(format_recommendation_text(recommendation['recommend']))
+    return render_template('recommendations.html', recommendations=recommend_text)
 
 def save_entry(entry_text, mood, date):
     if not os.path.exists(CSV_FILE):
